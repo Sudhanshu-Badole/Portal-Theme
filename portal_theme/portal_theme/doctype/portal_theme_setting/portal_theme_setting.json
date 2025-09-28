@@ -1,0 +1,235 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-09-27 20:51:51.837388",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "enable",
+  "column_break_pbmh",
+  "status",
+  "login_page_section",
+  "apply_on_login_page",
+  "background_image",
+  "background_opacity",
+  "apply_image_or_color",
+  "completely_hide_footer_from_login_page",
+  "column_break_olax",
+  "background_color",
+  "text_color",
+  "position_of_login_card",
+  "opacity_of_login_card",
+  "navbar_section",
+  "navbar_color",
+  "column_break_veqf",
+  "navbar_text_color",
+  "buttons_section",
+  "primary_button_column",
+  "primary_button_background",
+  "primary_button_text",
+  "primary_button_hover_background",
+  "column_break_cort",
+  "secondary_button_background",
+  "secondary_button_text",
+  "section_break_ghnq",
+  "card_background_color",
+  "card_header_color",
+  "card_text_color",
+  "column_break_scyz",
+  "section_heading_color"
+ ],
+ "fields": [
+  {
+   "fieldname": "login_page_section",
+   "fieldtype": "Section Break",
+   "label": "Login Page"
+  },
+  {
+   "fieldname": "background_image",
+   "fieldtype": "Attach Image",
+   "label": "Background Image"
+  },
+  {
+   "fieldname": "navbar_section",
+   "fieldtype": "Section Break",
+   "label": "NavBar/Header"
+  },
+  {
+   "fieldname": "navbar_color",
+   "fieldtype": "Color",
+   "label": "Navbar color"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable",
+   "fieldtype": "Check",
+   "label": "Enable"
+  },
+  {
+   "fieldname": "column_break_pbmh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Inactive\nActive",
+   "read_only": 1
+  },
+  {
+   "fieldname": "buttons_section",
+   "fieldtype": "Section Break",
+   "label": "Buttons"
+  },
+  {
+   "fieldname": "primary_button_column",
+   "fieldtype": "Column Break",
+   "label": "Primary Button"
+  },
+  {
+   "fieldname": "primary_button_background",
+   "fieldtype": "Color",
+   "label": "Primary Button Background"
+  },
+  {
+   "fieldname": "primary_button_text",
+   "fieldtype": "Color",
+   "label": "Primary Button Text"
+  },
+  {
+   "fieldname": "column_break_cort",
+   "fieldtype": "Column Break",
+   "label": "Secondary Button"
+  },
+  {
+   "fieldname": "primary_button_hover_background",
+   "fieldtype": "Color",
+   "label": "Primary Button Hover Background"
+  },
+  {
+   "fieldname": "secondary_button_background",
+   "fieldtype": "Color",
+   "label": "Secondary Button Background"
+  },
+  {
+   "fieldname": "secondary_button_text",
+   "fieldtype": "Color",
+   "label": "Secondary Button Text"
+  },
+  {
+   "fieldname": "column_break_veqf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "navbar_text_color",
+   "fieldtype": "Color",
+   "label": "Navbar Text Color"
+  },
+  {
+   "fieldname": "section_break_ghnq",
+   "fieldtype": "Section Break",
+   "label": "Cards / Sections"
+  },
+  {
+   "fieldname": "card_background_color",
+   "fieldtype": "Color",
+   "label": "Card Background Color"
+  },
+  {
+   "fieldname": "card_header_color",
+   "fieldtype": "Color",
+   "label": "Card Header Color"
+  },
+  {
+   "fieldname": "card_text_color",
+   "fieldtype": "Color",
+   "label": "Card Text Color"
+  },
+  {
+   "fieldname": "column_break_scyz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_heading_color",
+   "fieldtype": "Color",
+   "label": "Section Heading Color"
+  },
+  {
+   "fieldname": "column_break_olax",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "background_color",
+   "fieldtype": "Color",
+   "label": "Background Color"
+  },
+  {
+   "description": "Value should be between 0.0 to 1.0",
+   "fieldname": "background_opacity",
+   "fieldtype": "Float",
+   "label": "Background Opacity"
+  },
+  {
+   "default": "0",
+   "fieldname": "apply_on_login_page",
+   "fieldtype": "Check",
+   "label": "Apply on Login Page"
+  },
+  {
+   "fieldname": "text_color",
+   "fieldtype": "Color",
+   "label": "Text Color"
+  },
+  {
+   "default": "0",
+   "fieldname": "completely_hide_footer_from_login_page",
+   "fieldtype": "Check",
+   "label": "Completely Hide Footer from Login Page  "
+  },
+  {
+   "description": "0= Center,\n1 = Right,\n2 = Left",
+   "fieldname": "position_of_login_card",
+   "fieldtype": "Int",
+   "label": "Position of Login Card "
+  },
+  {
+   "description": "Value should be between 0.0 to 1.0",
+   "fieldname": "opacity_of_login_card",
+   "fieldtype": "Float",
+   "label": "Opacity of Login Card"
+  },
+  {
+   "fieldname": "apply_image_or_color",
+   "fieldtype": "Select",
+   "label": "Apply Image or Color",
+   "options": "Image\nColor"
+  }
+ ],
+ "grid_page_length": 50,
+ "hide_toolbar": 1,
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "make_attachments_public": 1,
+ "modified": "2025-09-28 23:17:23.434506",
+ "modified_by": "Administrator",
+ "module": "Portal Theme",
+ "name": "Portal Theme Setting",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
