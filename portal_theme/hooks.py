@@ -32,9 +32,9 @@ app_license = "mit"
 app_include_js = "/assets/portal_theme/js/navbar.js"
 
 # in hooks.py
-website_context = {
-    "theme_settings": frappe.get_single("Portal Theme Setting")
-}
+# website_context = {
+#     "theme_settings": frappe.get_single("Portal Theme Setting")
+# }
 
 
 # include js, css files in header of web template
