@@ -52,18 +52,18 @@ def get_context(context):
     context["app_name"] = (
         frappe.get_website_settings("app_name") or frappe.get_system_settings("app_name") or _("Frappe")
     )
-    # portal_theme_setting = frappe.get_single("Portal Theme Setting")
-    # if portal_theme_setting.enable:
-    #     if portal_theme_setting.apply_on_login_page:
-    #         context["background_image"] = portal_theme_setting.background_image
-    #         context["background_opacity"] = portal_theme_setting.background_opacity
-    #         context["text_color"] = portal_theme_setting.text_color
-    #         context["completely_hide_footer_from_login_page"] = portal_theme_setting.completely_hide_footer_from_login_page
-    #         context["position_of_login_card"] = portal_theme_setting.position_of_login_card 
-    #         context["opacity_of_login_card"] = portal_theme_setting.opacity_of_login_card
-    #         context["completely_hide_footer_from_login_page"] = portal_theme_setting.completely_hide_footer_from_login_page
-    #         context["apply_image_or_color"] = portal_theme_setting.apply_image_or_color
-    #         context["background_color"] = portal_theme_setting.background_color
+    portal_theme_setting = frappe.get_single("Portal Theme Setting")
+    if portal_theme_setting.enable:
+        if portal_theme_setting.apply_on_login_page:
+            context["background_image"] = portal_theme_setting.background_image
+            context["background_opacity"] = portal_theme_setting.background_opacity
+            context["text_color"] = portal_theme_setting.text_color
+            context["completely_hide_footer_from_login_page"] = portal_theme_setting.completely_hide_footer_from_login_page
+            context["position_of_login_card"] = portal_theme_setting.position_of_login_card 
+            context["opacity_of_login_card"] = portal_theme_setting.opacity_of_login_card
+            context["completely_hide_footer_from_login_page"] = portal_theme_setting.completely_hide_footer_from_login_page
+            context["apply_image_or_color"] = portal_theme_setting.apply_image_or_color
+            context["background_color"] = portal_theme_setting.background_color
 
     signup_form_template = frappe.get_hooks("signup_form_template")
     if signup_form_template and len(signup_form_template):
