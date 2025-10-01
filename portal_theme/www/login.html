@@ -62,10 +62,14 @@
 			background-size: cover;
 		{% elif apply_image_or_color == "Color" and background_color %}
 			background: {{ background_color }};
+		{% elif apply_image_or_color == "Slider" and background_slider_images %}
+			background: url('{{ background_slider_images[0] }}') no-repeat center center;
+			background-size: cover;
+			transition: background-image {{ transition or 0.6 }}s ease-in-out;
 		{% endif %}
 	}
 
-	{% if apply_image_or_color == "Image" and background_image %}
+	{% if apply_image_or_color == "Image" and background_image or apply_image_or_color == "Slider"  %}
 	body::before {
 		content: "";
 		position: absolute;
@@ -128,6 +132,17 @@
 		display: none !important;
 	}
 	{% endif %}
+
+    .navbar {
+        {% if login_navbar %}
+            background-color: {{ login_navbar }} !important;
+        {% endif %}
+    }
+	.navbar a, .navbar .nav-link {
+		{% if login_navbar_text %}
+			color: {{ login_navbar_text }} !important;
+		{% endif %}
+	}
 </style>
 {% endblock %}
 
@@ -323,6 +338,28 @@
 
 {% block script %}
 <script>{% include "templates/includes/login/login.js" %}</script>
+
+{% if apply_image_or_color == "Slider" and background_slider_images %}
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		let images = {{ background_slider_images | tojson }};
+		let index = 0;
+		let body = document.querySelector("body");
+
+		let interval = ({{ interval or 5 }}) * 1000; 
+		let transition = {{ transition or 0.6 }} * 1000; 
+
+		if (images.length > 1) {
+			setInterval(() => {
+				index = (index + 1) % images.length;
+				body.style.backgroundImage = `url('${images[index]}')`;
+			}, interval + transition); 
+		}
+	});
+</script>
+{% endif %}
+
 {% endblock %}
+
 
 {% block sidebar %}{% endblock %}

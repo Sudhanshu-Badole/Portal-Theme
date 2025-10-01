@@ -64,6 +64,13 @@ def get_context(context):
             context["completely_hide_footer_from_login_page"] = portal_theme_setting.completely_hide_footer_from_login_page
             context["apply_image_or_color"] = portal_theme_setting.apply_image_or_color
             context["background_color"] = portal_theme_setting.background_color
+            context["login_navbar"] = portal_theme_setting.login_navbar
+            context["login_navbar_text"] = portal_theme_setting.login_navbar_text
+            if portal_theme_setting.apply_image_or_color == "Slider":
+                background_slider_images = [image.image for image in portal_theme_setting.background_images]
+                context["background_slider_images"] = background_slider_images
+                context["interval"] = portal_theme_setting.interval
+                context["transition"] = portal_theme_setting.transition
 
     signup_form_template = frappe.get_hooks("signup_form_template")
     if signup_form_template and len(signup_form_template):

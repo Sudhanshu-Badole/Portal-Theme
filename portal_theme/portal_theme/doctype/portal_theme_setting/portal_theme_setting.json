@@ -5,24 +5,34 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "tab_break_mhtp",
   "enable",
   "column_break_pbmh",
   "status",
-  "login_page_section",
-  "apply_on_login_page",
-  "background_image",
-  "background_opacity",
-  "apply_image_or_color",
-  "completely_hide_footer_from_login_page",
-  "column_break_olax",
-  "background_color",
-  "text_color",
-  "position_of_login_card",
-  "opacity_of_login_card",
   "navbar_section",
   "navbar_color",
   "column_break_veqf",
   "navbar_text_color",
+  "login_tab",
+  "apply_on_login_page",
+  "column_break_fuhe",
+  "apply_image_or_color",
+  "login_page_section",
+  "background_image",
+  "background_opacity",
+  "background_images",
+  "transition",
+  "interval",
+  "column_break_olax",
+  "login_navbar",
+  "login_navbar_text",
+  "background_color",
+  "text_color",
+  "position_of_login_card",
+  "opacity_of_login_card",
+  "section_break_mnsj",
+  "completely_hide_footer_from_login_page",
+  "buttons_tab",
   "buttons_section",
   "primary_button_column",
   "primary_button_background",
@@ -31,6 +41,7 @@
   "column_break_cort",
   "secondary_button_background",
   "secondary_button_text",
+  "cards_tab",
   "section_break_ghnq",
   "card_background_color",
   "card_header_color",
@@ -41,10 +52,10 @@
  "fields": [
   {
    "fieldname": "login_page_section",
-   "fieldtype": "Section Break",
-   "label": "Login Page"
+   "fieldtype": "Section Break"
   },
   {
+   "depends_on": "eval:doc.apply_image_or_color == \"Image\"",
    "fieldname": "background_image",
    "fieldtype": "Attach Image",
    "label": "Background Image"
@@ -159,6 +170,7 @@
    "fieldtype": "Column Break"
   },
   {
+   "depends_on": "eval:doc.apply_image_or_color == \"Color\"",
    "fieldname": "background_color",
    "fieldtype": "Color",
    "label": "Background Color"
@@ -199,10 +211,68 @@
    "label": "Opacity of Login Card"
   },
   {
+   "default": "Color",
    "fieldname": "apply_image_or_color",
    "fieldtype": "Select",
-   "label": "Apply Image or Color",
-   "options": "Image\nColor"
+   "label": "Apply Image or Color or Slider",
+   "options": "Image\nColor\nSlider"
+  },
+  {
+   "fieldname": "tab_break_mhtp",
+   "fieldtype": "Tab Break",
+   "label": "General"
+  },
+  {
+   "fieldname": "buttons_tab",
+   "fieldtype": "Tab Break",
+   "label": "Buttons"
+  },
+  {
+   "fieldname": "login_tab",
+   "fieldtype": "Tab Break",
+   "label": "Login"
+  },
+  {
+   "fieldname": "cards_tab",
+   "fieldtype": "Tab Break",
+   "label": "Cards"
+  },
+  {
+   "fieldname": "login_navbar",
+   "fieldtype": "Color",
+   "label": "Login Navbar"
+  },
+  {
+   "fieldname": "login_navbar_text",
+   "fieldtype": "Color",
+   "label": "Login Navbar Text"
+  },
+  {
+   "fieldname": "column_break_fuhe",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.apply_image_or_color == \"Slider\"",
+   "fieldname": "background_images",
+   "fieldtype": "Table",
+   "label": "Background Images",
+   "options": "Background Images"
+  },
+  {
+   "depends_on": "eval:doc.apply_image_or_color == \"Slider\"",
+   "fieldname": "transition",
+   "fieldtype": "Float",
+   "label": "Transition"
+  },
+  {
+   "fieldname": "section_break_mnsj",
+   "fieldtype": "Section Break"
+  },
+  {
+   "depends_on": "eval:doc.apply_image_or_color == \"Slider\"",
+   "fieldname": "interval",
+   "fieldtype": "Float",
+   "label": "Interval"
   }
  ],
  "grid_page_length": 50,
@@ -211,7 +281,7 @@
  "issingle": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2025-09-28 23:17:23.434506",
+ "modified": "2025-10-02 00:44:11.180263",
  "modified_by": "Administrator",
  "module": "Portal Theme",
  "name": "Portal Theme Setting",

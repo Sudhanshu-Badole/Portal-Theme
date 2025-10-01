@@ -29,7 +29,7 @@ app_license = "mit"
 
 # include js, css files in header of desk.html
 # app_include_css = "/assets/portal_theme/css/login.bundle.scss"
-app_include_js = "/assets/portal_theme/js/navbar.js"
+app_include_js = "/assets/portal_theme/js/portal_theme.js"
 
 
 # include js, css files in header of web template
