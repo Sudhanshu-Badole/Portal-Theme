@@ -6,14 +6,14 @@ $(document).ready(function () {
         method: "frappe.client.get",
         args: {
             doctype: "Portal Theme Setting",
-            name: "Portal Theme Setting" 
+            name: "Portal Theme Setting"
         },
         callback: function (r) {
             if (!r.exc && r.message) {
                 let s = r.message;
 
                 if (s.enable) {
-                    
+
                     let cssVars = `
                         :root {
                             /* Navbar */
@@ -35,6 +35,13 @@ $(document).ready(function () {
                             --card-header-text: ${s.card_header_text || "inherit"};
                             --card-text: ${s.card_text_color || "inherit"};
 
+                            /* Forms */
+                            --form-bg: ${s.form_background_color || "inherit"};
+                            --form-text: ${s.form_text_color || "inherit"};
+
+                            /* Portal Background */
+                            --portal-bg: ${s.portal_background_color || "inherit"};
+
                             /* Section Headings */
                             --section-heading: ${s.section_heading_color || "inherit"};
 
@@ -44,6 +51,14 @@ $(document).ready(function () {
                     `;
 
                     let cssRules = `
+                        /* Portal Background */
+                        html, body {
+                            background-color: var(--portal-bg) !important;
+                        }
+                        .page-container {
+                            background-color: var(--portal-bg) !important;
+                        }
+
                         /* Navbar */
                         .navbar {
                             background-color: var(--navbar-bg) !important;
@@ -87,6 +102,18 @@ $(document).ready(function () {
                             color: var(--card-header-text) !important;
                         }
 
+                        /* Forms */
+                        .form-control {
+                            background-color: var(--form-bg) !important;
+                            color: var(--form-text) !important;
+                            border-color: #c7c7c7 !important;
+                            box-shadow: none !important;
+                        }
+                        .form-control:focus {
+                            outline: none !important;
+                            box-shadow: 0 0 0 1px var(--btn-primary-bg, #3498db) !important;
+                        }
+
                         /* Section Headings */
                         h1, h2, h3, h4, h5, h6,
                         .section-head {
@@ -109,7 +136,6 @@ $(document).ready(function () {
                     styleTag.innerHTML = cssVars + cssRules;
                     document.head.appendChild(styleTag);
                 }
-
             }
         }
     });

@@ -13,6 +13,8 @@
   "navbar_color",
   "column_break_veqf",
   "navbar_text_color",
+  "portal_section",
+  "portal_background_color",
   "login_tab",
   "apply_on_login_page",
   "column_break_fuhe",
@@ -46,6 +48,8 @@
   "card_background_color",
   "card_header_color",
   "card_text_color",
+  "form_background_color",
+  "form_text_color",
   "column_break_scyz",
   "section_heading_color"
  ],
@@ -273,6 +277,26 @@
    "fieldname": "interval",
    "fieldtype": "Float",
    "label": "Interval"
+  },
+  {
+   "fieldname": "form_background_color",
+   "fieldtype": "Color",
+   "label": "Form Background Color"
+  },
+  {
+   "fieldname": "form_text_color",
+   "fieldtype": "Color",
+   "label": "Form Text Color"
+  },
+  {
+   "fieldname": "portal_section",
+   "fieldtype": "Section Break",
+   "label": "Portal"
+  },
+  {
+   "fieldname": "portal_background_color",
+   "fieldtype": "Color",
+   "label": "Background Color"
   }
  ],
  "grid_page_length": 50,
@@ -281,7 +305,7 @@
  "issingle": 1,
  "links": [],
  "make_attachments_public": 1,
- "modified": "2025-10-02 00:44:11.180263",
+ "modified": "2025-10-04 23:53:18.861410",
  "modified_by": "Administrator",
  "module": "Portal Theme",
  "name": "Portal Theme Setting",
