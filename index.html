@@ -2,24 +2,267 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Portal Theme Documentation</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Portal Theme Setting - Documentation (v1)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background: #4CAF50;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+        }
+        nav {
+            background: #333;
+            color: #fff;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+        }
+        nav a {
+            color: #fff;
+            margin-right: 1rem;
+            text-decoration: none;
+        }
+        main {
+            max-width: 1000px;
+            margin: auto;
+            padding: 1rem;
+            background: #fff;
+        }
+        h1, h2, h3 {
+            color: #4CAF50;
+        }
+        code {
+            background: #eee;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+        pre {
+            background: #eee;
+            padding: 10px;
+            overflow-x: auto;
+            border-radius: 5px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background: #f4f4f4;
+        }
+        section {
+            margin-bottom: 2rem;
+        }
+    </style>
 </head>
 <body>
 
-<h1>Portal Theme Documentation</h1>
+<header>
+    <h1>Portal Theme Setting - Documentation (Version 1)</h1>
+    <p>Single Doctype implementation for portal and login theme management</p>
+</header>
 
-<section id="version1">
-    <h2>Version 1: Portal Theme Setting (Single Doctype)</h2>
-    <p>Detailed documentation for Version 1 goes here...</p>
-    <!-- You can paste the documentation content you already have -->
+<nav>
+    <a href="#overview">Overview</a>
+    <a href="#fields">Fields</a>
+    <a href="#backend">Backend Logic</a>
+    <a href="#frontend">Frontend Application</a>
+    <a href="#login">Login Page Integration</a>
+    <a href="#lifecycle">Lifecycle</a>
+    <a href="#limitations">Limitations</a>
+    <a href="#example">Example Use Case</a>
+    <a href="#files">File Summary</a>
+</nav>
+
+<main>
+
+<section id="overview">
+    <h2>Overview</h2>
+    <p>The <strong>Portal Theme Setting</strong> is a <em>Single Doctype</em> in Frappe designed to manage the visual appearance of portal pages and the login screen. 
+    It allows configuration of colors, backgrounds, buttons, cards, forms, and optional login-page behaviors. 
+    The system applies these configurations automatically on portal pages and login screens.</p>
 </section>
 
-<section id="version2">
-    <h2>Version 2: Portal Themes (Multiple Records)</h2>
-    <p>Detailed documentation for Version 2 goes here...</p>
-    <!-- We'll write Version 2 documentation next -->
+<section id="fields">
+    <h2>Main Fields</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Field Label</th>
+                <th>Fieldname</th>
+                <th>Fieldtype</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Enable</td><td>enable</td><td>Check</td><td>Enable or disable the theme</td></tr>
+            <tr><td>Apply On Login Page</td><td>apply_on_login_page</td><td>Check</td><td>Apply theme on login page</td></tr>
+            <tr><td>Apply Image or Color</td><td>apply_image_or_color</td><td>Select</td><td>Options: Image, Color, Slider</td></tr>
+            <tr><td>Background Image</td><td>background_image</td><td>Attach Image</td><td>Background image for login/portal</td></tr>
+            <tr><td>Background Color</td><td>background_color</td><td>Color</td><td>Background color if Image is not used</td></tr>
+            <tr><td>Background Opacity</td><td>background_opacity</td><td>Float</td><td>Overlay opacity for image or slider</td></tr>
+            <tr><td>Background Slider Images</td><td>background_images</td><td>Table</td><td>Images for slider background</td></tr>
+            <tr><td>Interval</td><td>interval</td><td>Int</td><td>Time between slider transitions</td></tr>
+            <tr><td>Transition</td><td>transition</td><td>Float</td><td>Slider transition duration</td></tr>
+            <tr><td>Text Color</td><td>text_color</td><td>Color</td><td>Default text color for login/portal</td></tr>
+            <tr><td>Login Navbar</td><td>login_navbar</td><td>Color</td><td>Login page navbar background</td></tr>
+            <tr><td>Login Navbar Text</td><td>login_navbar_text</td><td>Color</td><td>Navbar link text color</td></tr>
+            <tr><td>Position of Login Card</td><td>position_of_login_card</td><td>Select</td><td>Left, Center, or Right alignment</td></tr>
+            <tr><td>Opacity of Login Card</td><td>opacity_of_login_card</td><td>Float</td><td>Transparency of login card</td></tr>
+            <tr><td>Completely Hide Footer</td><td>completely_hide_footer_from_login_page</td><td>Check</td><td>Remove footer from login page</td></tr>
+        </tbody>
+    </table>
+
+    <h3>Portal UI Fields</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Field Label</th>
+                <th>Fieldname</th>
+                <th>Fieldtype</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Navbar Background</td><td>navbar_color</td><td>Color</td><td>Navbar background color</td></tr>
+            <tr><td>Navbar Text</td><td>navbar_text_color</td><td>Color</td><td>Navbar text color</td></tr>
+            <tr><td>Primary Button Background</td><td>primary_button_background</td><td>Color</td><td>Primary button color</td></tr>
+            <tr><td>Primary Button Text</td><td>primary_button_text</td><td>Color</td><td>Primary button text color</td></tr>
+            <tr><td>Primary Button Hover Background</td><td>primary_button_hover_background</td><td>Color</td><td>Primary button hover color</td></tr>
+            <tr><td>Secondary Button Background</td><td>secondary_button_background</td><td>Color</td><td>Secondary button background</td></tr>
+            <tr><td>Secondary Button Text</td><td>secondary_button_text</td><td>Color</td><td>Secondary button text color</td></tr>
+            <tr><td>Card Background</td><td>card_background_color</td><td>Color</td><td>Card background color</td></tr>
+            <tr><td>Card Header Background</td><td>card_header_color</td><td>Color</td><td>Card header background</td></tr>
+            <tr><td>Card Header Text</td><td>card_header_text</td><td>Color</td><td>Card header text color</td></tr>
+            <tr><td>Card Text</td><td>card_text_color</td><td>Color</td><td>Card text color</td></tr>
+            <tr><td>Form Background</td><td>form_background_color</td><td>Color</td><td>Form field background</td></tr>
+            <tr><td>Form Text</td><td>form_text_color</td><td>Color</td><td>Form field text color</td></tr>
+            <tr><td>Portal Background</td><td>portal_background_color</td><td>Color</td><td>Portal page background</td></tr>
+            <tr><td>Section Heading Color</td><td>section_heading_color</td><td>Color</td><td>Section heading text color</td></tr>
+            <tr><td>Label Text Color</td><td>label_text_color</td><td>Color</td><td>Form and grid label text color</td></tr>
+        </tbody>
+    </table>
 </section>
+
+<section id="backend">
+    <h2>Backend Logic</h2>
+    <p>Single Doctype allows fetching the active theme using:</p>
+    <pre><code>import frappe
+
+@frappe.whitelist()
+def get_active_portal_theme_setting():
+    theme = frappe.get_single("Portal Theme Setting")
+    if theme.enable:
+        return theme.as_dict()
+    return {}</code></pre>
+</section>
+
+<section id="login">
+    <h2>Login Page Integration</h2>
+    <pre><code>active_theme = get_active_portal_theme_setting()
+if active_theme and active_theme.enable and active_theme.apply_on_login_page:
+    context["background_image"] = active_theme.background_image
+    context["background_opacity"] = active_theme.background_opacity
+    context["text_color"] = active_theme.text_color
+    context["apply_image_or_color"] = active_theme.apply_image_or_color
+    context["background_color"] = active_theme.background_color
+    context["position_of_login_card"] = active_theme.position_of_login_card
+    context["opacity_of_login_card"] = active_theme.opacity_of_login_card
+    context["completely_hide_footer_from_login_page"] = active_theme.completely_hide_footer_from_login_page
+    context["login_navbar"] = active_theme.login_navbar
+    context["login_navbar_text"] = active_theme.login_navbar_text
+
+    if active_theme.apply_image_or_color == "Slider":
+        context["background_slider_images"] = [i.image for i in active_theme.background_images]
+        context["interval"] = active_theme.interval
+        context["transition"] = active_theme.transition</code></pre>
+</section>
+
+<section id="frontend">
+    <h2>Frontend Application</h2>
+    <p>The frontend JS injects CSS variables dynamically:</p>
+    <pre><code>frappe.call({
+    method: "portal_theme.portal_theme.doctype.portal_theme_setting.portal_theme_setting.get_active_portal_theme_setting",
+    callback: function(r){
+        if(r.message && r.message.enable){
+            let s = r.message;
+            let cssVars = `
+                :root {
+                    --navbar-bg: ${s.navbar_color || 'inherit'};
+                    --btn-primary-bg: ${s.primary_button_background || 'inherit'};
+                    ...
+                }
+            `;
+            let styleTag = document.createElement("style");
+            styleTag.innerHTML = cssVars;
+            document.head.appendChild(styleTag);
+        }
+    }
+});</code></pre>
+</section>
+
+<section id="lifecycle">
+    <h2>Lifecycle</h2>
+    <ol>
+        <li>Administrator configures the theme in <em>Portal Theme Setting</em>.</li>
+        <li>Frontend JS loads the settings via Frappe call.</li>
+        <li>Dynamic CSS variables are injected into DOM.</li>
+        <li>Login page context variables are applied via Jinja template.</li>
+    </ol>
+</section>
+
+<section id="limitations">
+    <h2>Limitations</h2>
+    <ul>
+        <li>Only one global theme exists at a time.</li>
+        <li>No support for multiple themes per customer.</li>
+        <li>Previewing requires manual save and refresh.</li>
+        <li>Login and portal themes are tightly coupled.</li>
+    </ul>
+</section>
+
+<section id="example">
+    <h2>Example Use Case</h2>
+    <p>Dark theme with image-based login:</p>
+    <ol>
+        <li>Enable theme and apply on login page.</li>
+        <li>Select "Image" mode and upload a background image.</li>
+        <li>Set background_opacity to 0.4.</li>
+        <li>Set navbar, primary button colors.</li>
+        <li>Save & refresh portal → UI updates automatically.</li>
+    </ol>
+</section>
+
+<section id="files">
+    <h2>File Summary</h2>
+    <table>
+        <thead>
+            <tr><th>File</th><th>Purpose</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>portal_theme_setting.json</td><td>Doctype definition (Single)</td></tr>
+            <tr><td>portal_theme_setting.py</td><td>Server-side logic & API</td></tr>
+            <tr><td>portal_theme.js</td><td>Frontend CSS injector</td></tr>
+            <tr><td>login.py</td><td>Login page context handler</td></tr>
+            <tr><td>login.html</td><td>Jinja template for login page styling</td></tr>
+        </tbody>
+    </table>
+</section>
+
+</main>
 
 </body>
 </html>
