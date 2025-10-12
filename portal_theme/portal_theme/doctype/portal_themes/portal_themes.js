@@ -1,7 +1,11 @@
-// Copyright (c) 2025, Indictrans and contributors
+// Copyright (c) 2025, Sudhanshu Badole and contributors
 // For license information, please see license.txt
 
-frappe.ui.form.on("Portal Theme Setting", {
+frappe.ui.form.on("Portal Themes", {
+	refresh(frm) {
+
+	},
+    
     after_save: function (frm) {
         window.location.reload();
     },

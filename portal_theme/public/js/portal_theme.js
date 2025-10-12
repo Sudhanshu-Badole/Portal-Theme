@@ -3,11 +3,7 @@
 
 $(document).ready(function () {
     frappe.call({
-        method: "frappe.client.get",
-        args: {
-            doctype: "Portal Theme Setting",
-            name: "Portal Theme Setting"
-        },
+        method: "portal_theme.portal_theme.doctype.portal_themes.portal_themes.get_active_portal_theme",
         callback: function (r) {
             if (!r.exc && r.message) {
                 let s = r.message;
