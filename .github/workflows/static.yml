@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Portal Theme Documentation</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<h1>Portal Theme Documentation</h1>
+
+<section id="version1">
+    <h2>Version 1: Portal Theme Setting (Single Doctype)</h2>
+    <p>Detailed documentation for Version 1 goes here...</p>
+    <!-- You can paste the documentation content you already have -->
+</section>
+
+<section id="version2">
+    <h2>Version 2: Portal Themes (Multiple Records)</h2>
+    <p>Detailed documentation for Version 2 goes here...</p>
+    <!-- We'll write Version 2 documentation next -->
+</section>
+
+</body>
+</html>
