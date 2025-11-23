@@ -1,0 +1,87 @@
+{
+ "actions": [],
+ "autoname": "field:theme_name",
+ "creation": "2025-11-20 17:21:41.132733",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "theme_name",
+  "is_active",
+  "slug",
+  "section_break_eseb",
+  "description",
+  "theme_variables",
+  "css_content"
+ ],
+ "fields": [
+  {
+   "fieldname": "theme_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Theme Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "slug",
+   "fieldtype": "Data",
+   "label": "Slug",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "label": "Is Active"
+  },
+  {
+   "fieldname": "section_break_eseb",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description"
+  },
+  {
+   "fieldname": "theme_variables",
+   "fieldtype": "Table",
+   "label": "Theme Variables",
+   "options": "Theme Variable"
+  },
+  {
+   "fieldname": "css_content",
+   "fieldtype": "Text",
+   "in_list_view": 1,
+   "label": "CSS Content"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-11-22 12:38:27.338629",
+ "modified_by": "Administrator",
+ "module": "Portal Theme",
+ "name": "Portal Theme",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,63 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-11-20 17:24:59.649275",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "variable_name",
+  "column_break_acwc",
+  "light_value",
+  "column_break_jwsg",
+  "dark_value"
+ ],
+ "fields": [
+  {
+   "description": "Name without --, e.g. primary, background, text, card-bg",
+   "fieldname": "variable_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Variable Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_acwc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "\"Hex or rgba, e.g. #ffffff\"",
+   "fieldname": "light_value",
+   "fieldtype": "Color",
+   "in_list_view": 1,
+   "label": "Light Value",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_jwsg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Hex or rgba, e.g. #111111",
+   "fieldname": "dark_value",
+   "fieldtype": "Color",
+   "in_list_view": 1,
+   "label": "Dark Value",
+   "reqd": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-11-22 12:38:56.488476",
+ "modified_by": "Administrator",
+ "module": "Portal Theme",
+ "name": "Theme Variable",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
