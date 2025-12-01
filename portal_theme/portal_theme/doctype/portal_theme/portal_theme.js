@@ -1,124 +1,81 @@
-// Copyright (c) 2025, Sudhanshu Badole and contributors
-// For license information, please see license.txt
+// Copyright (c) 
+// For license information, see license.txt
 
 frappe.ui.form.on("Portal Theme", {
-    refresh(frm) {
-        if (!frm._color_button_added) {
-            frm.add_custom_button("Generate Theme", () => {
-                open_color_shade_dialog(frm);
-            });
-            frm._color_button_added = true;
+    add_variables(frm) {
+        frm.clear_table("theme_variables");
+        if (!frm.doc.primary && !frm.doc.secondary && !frm.doc.accent && !frm.doc.neutral) {
+            frappe.throw("Please select at least one color.");
         }
-    },
-});
-
-function open_color_shade_dialog(frm) {
-
-    let d = new frappe.ui.Dialog({
-        title: "Theme Color Generator",
-        fields: [
-            {
-                label: "Color 1",
-                fieldname: "c1",
-                fieldtype: "Color",
-                reqd: true
-            },
-            {
-                label: "Color 2",
-                fieldname: "c2",
-                fieldtype: "Color",
-                reqd: true
-            },
-            {
-                label: "Color 3",
-                fieldname: "c3",
-                fieldtype: "Color",
-                reqd: true
-            },
-            {
-                label: "Color 4",
-                fieldname: "c4",
-                fieldtype: "Color",
-                reqd: true
-            },
-            {
-                label: "Number of Shades (4-8)",
-                fieldname: "shade_count",
-                fieldtype: "Int",
-                default: 5,
-                reqd: true,
-                description: "Max 3"
-            }
-        ],
-        primary_action_label: "Generate",
-        primary_action(values) {
-
-            if (values.shade_count < 3) {
-                frappe.msgprint("Shades must be between 1 and 3.");
-                return;
-            }
-
-            generate_theme_variables(frm, values);
-            d.hide();
-        }
-    });
-
-    d.show();
-}
-
-function generate_theme_variables(frm, values) {
-
-    // Fixed 4 color names
-    const names = ["primary", "secondary", "accent", "neutral"];
-    const baseColors = [values.c1, values.c2, values.c3, values.c4];
-
-    // Clear previous rows
-    frm.clear_table("theme_variables");
-
-    let shadeCount = values.shade_count;
-
-    // Calculate shade levels (even spread)
-    let steps = [];
-    let stepGap = 100 / (shadeCount + 1);
-    for (let i = 0; i < shadeCount; i++) {
-        steps.push(100 - (i + 1) * stepGap);
+        generate_color_rows(frm);
     }
 
-    // For each of the 4 colors
-    names.forEach((name, index) => {
+});
 
-        let baseColor = baseColors[index];
+function generate_color_rows(frm) {
 
-        steps.forEach((percent, shadeIndex) => {
-            let generated = adjustColor(baseColor, percent);
+    let colors = [
+        { name: "primary", value: frm.doc.primary },
+        { name: "secondary", value: frm.doc.secondary },
+        { name: "accent", value: frm.doc.accent },
+        { name: "neutral", value: frm.doc.neutral }
+    ];
 
-            frm.add_child("theme_variables", {
-                variable_name: `--${name}-${(shadeIndex + 1)}00`,
-                light_value: generated,
-                dark_value: generated
-            });
+    colors.forEach(c => {
+        if (!c.value) return;
+        
+        let exists = (frm.doc.variables || []).some(row => row.variable_name === c.name);
+        if (exists) return;
+        
+        const light = c.value;
+        const dark = darkenColor(light, 35);
+        const lightText = getContrastText(light);
+        const darkText = getContrastText(dark);
+
+        frm.add_child("theme_variables", {
+            variable_name: `--${c.name}`,
+            light_value: light,
+            dark_value: dark,
+            light_text: lightText,
+            dark_text: darkText
         });
     });
-
     frm.refresh_field("theme_variables");
-    frappe.show_alert("Theme variables generated!",5);
 }
 
 
-// Utility function: darken/lighten color by percent (0-100)
-function adjustColor(hex, percent) {
+function darkenColor(hex, percent = 30) {
 
-    let num = parseInt(hex.replace("#", ""), 16),
-        r = (num >> 16),
-        g = (num >> 8) & 0xff,
-        b = num & 0xff;
+    if (!hex) return "";
 
-    r = Math.round(r * (percent / 100));
-    g = Math.round(g * (percent / 100));
-    b = Math.round(b * (percent / 100));
+    hex = hex.replace("#", "");
 
-    return "#" + (1 << 24 | (r << 16) | (g << 8) | b)
-        .toString(16)
-        .slice(1)
-        .toUpperCase();
+    let r = parseInt(hex.substring(0, 2), 16);
+    let g = parseInt(hex.substring(2, 4), 16);
+    let b = parseInt(hex.substring(4, 6), 16);
+
+    r = Math.max(0, parseInt(r * (1 - percent / 100)));
+    g = Math.max(0, parseInt(g * (1 - percent / 100)));
+    b = Math.max(0, parseInt(b * (1 - percent / 100)));
+
+    return "#" +
+        r.toString(16).padStart(2, "0") +
+        g.toString(16).padStart(2, "0") +
+        b.toString(16).padStart(2, "0");
+}
+
+
+function getContrastText(hex) {
+
+    if (!hex) return "#000000";
+
+    hex = hex.replace("#", "");
+
+    let r = parseInt(hex.substring(0, 2), 16);
+    let g = parseInt(hex.substring(2, 4), 16);
+    let b = parseInt(hex.substring(4, 6), 16);
+
+    let brightness = (r * 299 + g * 587 + b * 114) / 1000;
+
+    return brightness > 128 ? "#000000" : "#FFFFFF";
 }

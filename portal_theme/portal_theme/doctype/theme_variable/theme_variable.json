@@ -9,7 +9,13 @@
   "column_break_acwc",
   "light_value",
   "column_break_jwsg",
-  "dark_value"
+  "dark_value",
+  "section_break_twzs",
+  "column_break_taod",
+  "column_break_nsqh",
+  "light_text",
+  "column_break_ygbx",
+  "dark_text"
  ],
  "fields": [
   {
@@ -43,13 +49,43 @@
    "in_list_view": 1,
    "label": "Dark Value",
    "reqd": 1
+  },
+  {
+   "fieldname": "section_break_twzs",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_taod",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_nsqh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "light_text",
+   "fieldtype": "Color",
+   "in_list_view": 1,
+   "label": "Light Text",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_ygbx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "dark_text",
+   "fieldtype": "Color",
+   "in_list_view": 1,
+   "label": "Dark Text",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-11-22 12:38:56.488476",
+ "modified": "2025-11-25 15:47:01.730949",
  "modified_by": "Administrator",
  "module": "Portal Theme",
  "name": "Theme Variable",
