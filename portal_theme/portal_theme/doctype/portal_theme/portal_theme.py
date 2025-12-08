@@ -18,7 +18,9 @@ class PortalTheme(Document):
 		self.slugify_theme_name()
 
 	def before_save(self):
-		"""Process slug + generate CSS before saving"""
+		all_doc = frappe.db.get_all(self.doctype, filters={"is_active": 1}, fields=['name'])
+		for doc in all_doc:
+			frappe.db.set_value(self.doctype, doc.name, "is_active", 0)
 		self.slugify_theme_name()
 		self.generate_css_for_doc()
 
@@ -117,9 +119,14 @@ class PortalTheme(Document):
 			cname = safe_name(name)
 			light_val = v.get("light_value") or ""
 			dark_val = v.get("dark_value") or light_val
+			dark_mode_text = v.get("light_text") or "#000000"
+			light_mode_text = v.get("dark_text") or "#ffffff"
 
 			light_lines.append(f"  --{cname}: {light_val};")
+			light_lines.append(f"  --{cname}-text-color: {dark_mode_text};")
+
 			dark_lines.append(f"  --{cname}: {dark_val};")
+			dark_lines.append(f"  --{cname}-text-color: {light_mode_text};")
 
 		# Light mode block
 		root_block = (
@@ -130,19 +137,19 @@ class PortalTheme(Document):
 
 		# Dark mode using HTML attribute or class
 		dark_attr_block = (
-			'[data-theme="dark"] :root,\n'
-			'.dark-theme :root {\n'
+			':root[data-theme="dark"] {\n'
 			+ "\n".join(dark_lines) +
 			"\n}\n\n"
 		)
 
 		# Dark mode via system preference
 		indented_dark = "\n".join("    " + line.strip() for line in dark_lines)
-		dark_media_block = (
-			"@media (prefers-color-scheme: dark) {\n"
-			"  :root {\n"
-			+ indented_dark +
-			"\n  }\n}\n\n"
-		)
+		# dark_media_block = (
+		# 	"@media (prefers-color-scheme: dark) {\n"
+		# 	"  :root {\n"
+		# 	+ indented_dark +
+		# 	"\n  }\n}\n\n"
+		# )
+		dark_media_block = ""
 
 		return root_block + dark_attr_block + dark_media_block

@@ -8,8 +8,18 @@
   "theme_name",
   "is_active",
   "slug",
-  "section_break_eseb",
+  "column_break_zvkr",
   "description",
+  "section_break_nkmn",
+  "primary",
+  "column_break_atmg",
+  "secondary",
+  "column_break_clii",
+  "accent",
+  "column_break_fmfa",
+  "neutral",
+  "section_break_eseb",
+  "add_variables",
   "theme_variables",
   "css_content"
  ],
@@ -53,13 +63,59 @@
    "fieldname": "css_content",
    "fieldtype": "Text",
    "in_list_view": 1,
-   "label": "CSS Content"
+   "label": "CSS Content",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_zvkr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_nkmn",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "primary",
+   "fieldtype": "Color",
+   "label": "Primary"
+  },
+  {
+   "fieldname": "column_break_atmg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "secondary",
+   "fieldtype": "Color",
+   "label": "Secondary"
+  },
+  {
+   "fieldname": "column_break_clii",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "accent",
+   "fieldtype": "Color",
+   "label": "Accent"
+  },
+  {
+   "fieldname": "column_break_fmfa",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "neutral",
+   "fieldtype": "Color",
+   "label": "Neutral"
+  },
+  {
+   "fieldname": "add_variables",
+   "fieldtype": "Button",
+   "label": "Add Variables"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-11-22 12:38:27.338629",
+ "modified": "2025-12-01 23:46:04.093716",
  "modified_by": "Administrator",
  "module": "Portal Theme",
  "name": "Portal Theme",
