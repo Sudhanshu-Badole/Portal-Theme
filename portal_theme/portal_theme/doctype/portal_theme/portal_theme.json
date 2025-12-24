@@ -5,6 +5,7 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "basic_details_section",
   "theme_name",
   "is_active",
   "slug",
@@ -18,8 +19,15 @@
   "accent",
   "column_break_fmfa",
   "neutral",
-  "section_break_eseb",
+  "border_section",
+  "border_color",
+  "column_break_hyzd",
+  "border_radius",
+  "column_break_icsl",
+  "theme_template",
+  "column_break_vvvc",
   "add_variables",
+  "section_break_eseb",
   "theme_variables",
   "css_content"
  ],
@@ -72,12 +80,14 @@
   },
   {
    "fieldname": "section_break_nkmn",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "label": "Color"
   },
   {
    "fieldname": "primary",
    "fieldtype": "Color",
-   "label": "Primary"
+   "label": "Primary",
+   "reqd": 1
   },
   {
    "fieldname": "column_break_atmg",
@@ -86,7 +96,8 @@
   {
    "fieldname": "secondary",
    "fieldtype": "Color",
-   "label": "Secondary"
+   "label": "Secondary",
+   "reqd": 1
   },
   {
    "fieldname": "column_break_clii",
@@ -95,7 +106,8 @@
   {
    "fieldname": "accent",
    "fieldtype": "Color",
-   "label": "Accent"
+   "label": "Accent",
+   "reqd": 1
   },
   {
    "fieldname": "column_break_fmfa",
@@ -104,18 +116,59 @@
   {
    "fieldname": "neutral",
    "fieldtype": "Color",
-   "label": "Neutral"
+   "label": "Neutral",
+   "reqd": 1
   },
   {
    "fieldname": "add_variables",
    "fieldtype": "Button",
    "label": "Add Variables"
+  },
+  {
+   "fieldname": "theme_template",
+   "fieldtype": "Link",
+   "label": "Theme Template",
+   "options": "Theme Template",
+   "reqd": 1
+  },
+  {
+   "fieldname": "basic_details_section",
+   "fieldtype": "Section Break",
+   "label": "Basic Details"
+  },
+  {
+   "fieldname": "border_section",
+   "fieldtype": "Section Break",
+   "label": "Border and Version"
+  },
+  {
+   "description": "0 to 16",
+   "fieldname": "border_radius",
+   "fieldtype": "Int",
+   "label": "Border Radius"
+  },
+  {
+   "fieldname": "column_break_hyzd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "border_color",
+   "fieldtype": "Color",
+   "label": "Border Color"
+  },
+  {
+   "fieldname": "column_break_icsl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_vvvc",
+   "fieldtype": "Column Break"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-12-01 23:46:04.093716",
+ "modified": "2025-12-24 18:37:37.248458",
  "modified_by": "Administrator",
  "module": "Portal Theme",
  "name": "Portal Theme",
