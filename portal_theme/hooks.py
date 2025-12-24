@@ -246,4 +246,4 @@ app_include_js = ["/assets/portal_theme/js/portal_theme.js", "/assets/portal_the
 
 # Fixtures
 # ------------------
-export_fixtures = [{"dt": "Theme Template", "filters": [["name", "in", ["16.0.0-dev"]]]}]
+fixtures = [{"dt": "Theme Template", "filters": [["name", "in", ["16.0.0-dev"]]]}]
