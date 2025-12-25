@@ -1,6 +1,5 @@
 import frappe
 
-
 app_name = "portal_theme"
 app_title = "Portal Theme"
 app_publisher = "Sudhanshu Badole"
@@ -29,10 +28,7 @@ app_license = "mit"
 
 # include js, css files in header of desk.html
 # app_include_css = "/assets/portal_theme/css/login.bundle.scss"
-app_include_js = [
-    "/assets/portal_theme/js/portal_theme.js",
-    "/assets/portal_theme/js/load_theme.js"
-]
+app_include_js = ["/assets/portal_theme/js/portal_theme.js", "/assets/portal_theme/js/load_theme.js"]
 
 # include js, css files in header of web template
 # web_include_css = "/assets/portal_theme/css/portal_theme.css"
@@ -248,3 +244,6 @@ app_include_js = [
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
 
+# Fixtures
+# ------------------
+fixtures = [{"dt": "Theme Template", "filters": [["name", "in", ["16.0.0-dev"]]]}]

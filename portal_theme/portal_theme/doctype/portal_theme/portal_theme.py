@@ -1,14 +1,13 @@
 # Copyright (c) 2025, Sudhanshu Badole
 # For license information, please see license.txt
 
+import re
+
 import frappe
 from frappe.model.document import Document
-import re
-from portal_theme.portal_theme.doctype.portal_theme.theme_css_body import css_body
 
 
 class PortalTheme(Document):
-
 	# ---------------------------------------------------------
 	# HOOKS
 	# ---------------------------------------------------------
@@ -18,7 +17,7 @@ class PortalTheme(Document):
 		self.slugify_theme_name()
 
 	def before_save(self):
-		all_doc = frappe.db.get_all(self.doctype, filters={"is_active": 1}, fields=['name'])
+		all_doc = frappe.db.get_all(self.doctype, filters={"is_active": 1}, fields=["name"])
 		for doc in all_doc:
 			frappe.db.set_value(self.doctype, doc.name, "is_active", 0)
 		self.slugify_theme_name()
@@ -46,6 +45,22 @@ class PortalTheme(Document):
 		if self.theme_name:
 			self.slug = self.slugify(self.theme_name)
 
+	def get_css_from_theme_template(self):
+		"""
+		Fetch CSS body from Theme Template doctype
+		"""
+
+		exist = frappe.db.exists("Theme Template", self.theme_template)
+		if not exist:
+			return f"{self.theme_template} Theme Template not found."
+
+		template = frappe.db.get_value("Theme Template", self.theme_template, "theme_template")
+
+		if not template:
+			return f"{self.theme_template} CSS Content is empty."
+
+		return template
+
 	# ---------------------------------------------------------
 	# CSS GENERATION
 	# ---------------------------------------------------------
@@ -64,30 +79,29 @@ class PortalTheme(Document):
 			if not var_name:
 				continue
 
-			variables.append({
-				"variable_name": var_name,
-				"light_value": row.light_value or "",
-				"dark_value": row.dark_value or ""
-			})
+			variables.append(
+				{
+					"variable_name": var_name,
+					"light_value": row.light_value or "",
+					"dark_value": row.dark_value or "",
+				}
+			)
 
 		css_content = self.build_css_content(variables)
 		css_content += "\n\n/* Custom CSS Body */\n"
-		css_content += css_body or ""
+		css_content += self.get_css_from_theme_template() or ""
 
 		# Save without updating modified timestamp
 		self.db_set("css_content", css_content, update_modified=False)
 		self.db_set("slug", slug, update_modified=False)
 
-		frappe.logger("portal_theme").info(
-			f"Generated Portal Theme CSS for {theme_name} ({slug})"
-		)
+		frappe.logger("portal_theme").info(f"Generated Portal Theme CSS for {theme_name} ({slug})")
 
 	# ---------------------------------------------------------
 	# CORE CSS BUILDER
 	# ---------------------------------------------------------
 
-	@staticmethod
-	def build_css_content(variables):
+	def build_css_content(self, variables):
 		"""
 		Builds rooted CSS variables for light & dark themes.
 
@@ -128,22 +142,20 @@ class PortalTheme(Document):
 			dark_lines.append(f"  --{cname}: {dark_val};")
 			dark_lines.append(f"  --{cname}-text-color: {light_mode_text};")
 
-		# Light mode block
-		root_block = (
-			":root {\n"
-			+ "\n".join(light_lines) +
-			"\n}\n\n"
-		)
+		# Light mode block (include border variables)
+		border_var_lines = [
+			f"  --border-radius: {self.border_radius or '6'}px;",
+			f"  --border-color: {self.border_color or '#e0e0e0'};",
+			"  --border-width: 1px;",
+		]
+
+		root_block = ":root {\n" + "\n".join(light_lines + border_var_lines) + "\n}\n\n"
 
 		# Dark mode using HTML attribute or class
-		dark_attr_block = (
-			':root[data-theme="dark"] {\n'
-			+ "\n".join(dark_lines) +
-			"\n}\n\n"
-		)
+		dark_attr_block = ':root[data-theme="dark"] {\n' + "\n".join(dark_lines) + "\n}\n\n"
 
 		# Dark mode via system preference
-		indented_dark = "\n".join("    " + line.strip() for line in dark_lines)
+		# indented_dark = "\n".join("    " + line.strip() for line in dark_lines)
 		# dark_media_block = (
 		# 	"@media (prefers-color-scheme: dark) {\n"
 		# 	"  :root {\n"
