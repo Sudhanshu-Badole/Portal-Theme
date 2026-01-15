@@ -1,20 +1,16 @@
+function applyPortalTheme() {
+	frappe.call({
+		method: "frappe.client.get",
+		args: {
+			doctype: "Portal Theme Setting",
+			name: "Portal Theme Setting",
+		},
+		callback: function (r) {
+			if (!r.exc && r.message) {
+				let s = r.message;
 
-
-
-$(document).ready(function () {
-    frappe.call({
-        method: "frappe.client.get",
-        args: {
-            doctype: "Portal Theme Setting",
-            name: "Portal Theme Setting"
-        },
-        callback: function (r) {
-            if (!r.exc && r.message) {
-                let s = r.message;
-
-                if (s.enable) {
-
-                    let cssVars = `
+				if (s.enable) {
+					let cssVars = `
                         :root {
                             /* Navbar */
                             --navbar-bg: ${s.navbar_color || "inherit"};
@@ -23,7 +19,9 @@ $(document).ready(function () {
                             /* Primary Button */
                             --btn-primary-bg: ${s.primary_button_background || "inherit"};
                             --btn-primary-text: ${s.primary_button_text || "inherit"};
-                            --btn-primary-hover-bg: ${s.primary_button_hover_background || "inherit"};
+                            --btn-primary-hover-bg: ${
+								s.primary_button_hover_background || "inherit"
+							};
 
                             /* Secondary Button */
                             --btn-secondary-bg: ${s.secondary_button_background || "inherit"};
@@ -50,7 +48,7 @@ $(document).ready(function () {
                         }
                     `;
 
-                    let cssRules = `
+					let cssRules = `
                         /* Portal Background */
                         html, body {
                             background-color: var(--portal-bg) !important;
@@ -132,11 +130,13 @@ $(document).ready(function () {
                         }
                     `;
 
-                    let styleTag = document.createElement("style");
-                    styleTag.innerHTML = cssVars + cssRules;
-                    document.head.appendChild(styleTag);
-                }
-            }
-        }
-    });
-});
+					let styleTag = document.createElement("style");
+					styleTag.innerHTML = cssVars + cssRules;
+					document.head.appendChild(styleTag);
+				}
+			}
+		},
+	});
+}
+
+applyPortalTheme();

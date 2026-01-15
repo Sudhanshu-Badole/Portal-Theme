@@ -13,15 +13,15 @@ app_license = "mit"
 # required_apps = []
 
 # Each item in the list will be shown as an app in the apps page
-# add_to_apps_screen = [
-# 	{
-# 		"name": "portal_theme",
-# 		"logo": "/assets/portal_theme/logo.png",
-# 		"title": "Portal Theme",
-# 		"route": "/portal_theme",
-# 		"has_permission": "portal_theme.api.permission.has_app_permission"
-# 	}
-# ]
+add_to_apps_screen = [
+	{
+		"name": "portal_theme",
+		"logo": "/assets/portal_theme/logo.png",
+		"title": "Portal Theme",
+		"route": "/desk/portal-theme",
+		"has_permission": "portal_theme.api.permission.has_app_permission",
+	}
+]
 
 # Includes in <head>
 # ------------------
