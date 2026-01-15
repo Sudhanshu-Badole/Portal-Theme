@@ -93,10 +93,10 @@
 	}
 
 	/* --- login card alignment --- */
-	.for-login .page-card, 
-	.for-forgot .page-card, 
-	.for-login-with-email-link .page-card, 
-	.for-signup .page-card, 
+	.for-login .page-card,
+	.for-forgot .page-card,
+	.for-login-with-email-link .page-card,
+	.for-signup .page-card,
 	.for-email-login .page-card {
 		padding: 45px 10px;
 		background-color: #fff;
@@ -303,7 +303,7 @@
 			</form>
 		</div>
 	</section>
-	
+
 	<section class='for-login-with-email-link'>
 			{{ logo_section(_('Login with Email Link')) }}
 		<div class="login-content page-card">
@@ -346,14 +346,14 @@
 		let index = 0;
 		let body = document.querySelector("body");
 
-		let interval = ({{ interval or 5 }}) * 1000; 
-		let transition = {{ transition or 0.6 }} * 1000; 
+		let interval = ({{ interval or 5 }}) * 1000;
+		let transition = {{ transition or 0.6 }} * 1000;
 
 		if (images.length > 1) {
 			setInterval(() => {
 				index = (index + 1) % images.length;
 				body.style.backgroundImage = `url('${images[index]}')`;
-			}, interval + transition); 
+			}, interval + transition);
 		}
 	});
 </script>

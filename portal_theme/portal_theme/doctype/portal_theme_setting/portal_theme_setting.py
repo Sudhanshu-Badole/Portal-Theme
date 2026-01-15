@@ -6,7 +6,6 @@ from frappe.model.document import Document
 
 
 class PortalThemeSetting(Document):
-	
 	def validate(self):
 		if self.enable:
 			self.status = "Active"

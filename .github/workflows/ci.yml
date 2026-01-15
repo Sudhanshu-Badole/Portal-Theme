@@ -1,0 +1,106 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # Define Frappe versions and their corresponding compatible Python versions
+        include:
+          - frappe_version: version-16
+            python_version: '3.14'
+      fail-fast: false
+    name: Server - ${{ matrix.frappe_version }}
+
+    services:
+      redis-cache:
+        image: redis:alpine
+        ports:
+          - 13000:6379
+      redis-queue:
+        image: redis:alpine
+        ports:
+          - 11000:6379
+      mariadb:
+        image: mariadb:10.6
+        env:
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+        options: --health-cmd="mariadb-admin ping" --health-interval=5s --health-timeout=2s --health-retries=3
+
+    steps:
+      - name: Clone Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python_version }}
+          cache: 'pip'
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          check-latest: true
+
+      - name: Cache Yarn
+        uses: actions/cache@v4
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install MariaDB Client
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y mariadb-client
+
+      - name: Setup Frappe Bench
+        run: |
+          pip install frappe-bench
+          bench init --frappe-branch ${{ matrix.frappe_version }} --skip-redis-config-generation --skip-assets --python "$(which python)" ~/frappe-bench
+          
+          # Configure MariaDB for Frappe compatibility
+          mariadb --host 127.0.0.1 -u root -proot -e "SET GLOBAL character_set_server = 'utf8mb4'"
+          mariadb --host 127.0.0.1 -u root -proot -e "SET GLOBAL collation_server = 'utf8mb4_unicode_ci'"
+          mariadb --host 127.0.0.1 -u root -proot -e "SET GLOBAL innodb_file_per_table = ON"
+
+      - name: Install App & Prepare Site
+        working-directory: /home/runner/frappe-bench
+        run: |
+          # Link the app from the GitHub workspace
+          bench get-app portal_theme $GITHUB_WORKSPACE
+
+          if [ "${{ matrix.frappe_version }}" == "version-14" ]; then
+            ./env/bin/pip install "urllib3<2.0.0"
+          fi
+
+          bench setup requirements --dev
+          
+          # Create site and install app
+          bench new-site test_site --db-root-password root --admin-password admin --force
+          bench --site test_site install-app portal_theme
+          bench build
+        env:
+          CI: 'Yes'
+
+      - name: Run Tests
+        working-directory: /home/runner/frappe-bench
+        run: |
+          bench --site test_site set-config allow_tests true
+          bench --site test_site run-tests --app portal_theme
+        env:
+          TYPE: server
