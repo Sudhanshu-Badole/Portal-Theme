@@ -1,25 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Portal Theme Documentation</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+name: Deploy static site
 
-<h1>Portal Theme Documentation</h1>
+on:
+  push:
+    branches:
+      - main
+      - master
 
-<section id="version1">
-    <h2>Version 1: Portal Theme Setting (Single Doctype)</h2>
-    <p>Detailed documentation for Version 1 goes here...</p>
-    <!-- You can paste the documentation content you already have -->
-</section>
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
 
-<section id="version2">
-    <h2>Version 2: Portal Themes (Multiple Records)</h2>
-    <p>Detailed documentation for Version 2 goes here...</p>
-    <!-- We'll write Version 2 documentation next -->
-</section>
+    steps:
+      - uses: actions/checkout@v4
 
-</body>
-</html>
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Install dependencies
+        run: |
+          if [ -f package.json ]; then npm ci; fi
+
+      - name: Build
+        run: |
+          if [ -f package.json ]; then npm run build || true; fi
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./public
